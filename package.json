@@ -1,0 +1,60 @@
+{
+  "name": "mobobrowser",
+  "version": "1.0.0",
+  "description": "MoboBrowser - Native Mobile Device Browser for Testing Websites & Localhost on Windows",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis",
+    "portable": "electron-builder --win portable",
+    "build:all": "electron-builder --win"
+  },
+  "keywords": [
+    "mobobrowser",
+    "mobile",
+    "browser",
+    "native",
+    "android-studio",
+    "responsive-test"
+  ],
+  "author": "oreothebuilder",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^40.8.0",
+    "electron-builder": "^26.7.0"
+  },
+  "build": {
+    "appId": "com.mobobrowser.app",
+    "productName": "MoboBrowser",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "style.css",
+      "renderer.js",
+      "devices.js",
+      "demo.html"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

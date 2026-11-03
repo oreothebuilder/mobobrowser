@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mobile Web Test Page</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: #334155;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+    .header {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #60a5fa, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .badge {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: #0284c7;
+      color: #fff;
+      font-weight: 600;
+    }
+    .container {
+      padding: 18px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #4338ca);
+      padding: 24px 18px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.4);
+    }
+    .hero h1 {
+      font-size: 1.45rem;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .hero p {
+      font-size: 0.9rem;
+      color: #bfdbfe;
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: inline-block;
+      background: #fff;
+      color: #1e3a8a;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      cursor: pointer;
+      border: none;
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+    .section-title {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+    .card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .interactive-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .counter-display {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 10px 0;
+      color: #38bdf8;
+    }
+    .btn-row {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-row button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: #334155;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .btn-row button:active {
+      background: #475569;
+    }
+    .nav-test-box {
+      background: #111827;
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+    }
+    .nav-test-box h4 {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+    .nav-test-box p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .page-link-btn {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="brand">📱 MobileView Ready</div>
+    <div class="badge">Localhost Ready</div>
+  </div>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Mobile Web Test Bench</h1>
+      <p>Type your localhost server (e.g. <code>localhost:3000</code> or <code>5173</code>) in the floating bar above to view your real app!</p>
+      <button class="btn" onclick="alert('Touch & Tap working perfectly inside mobile device!')">Tap Test</button>
+    </div>
+
+    <div class="section-title">
+      <span>Device Features</span>
+      <span style="font-size:0.8rem; color:var(--muted)">Responsive</span>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Ultra Responsive</h3>
+        <p>Adapts to Pixel, Galaxy & iPhone aspect ratios.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">◀</div>
+        <h3>Back Button</h3>
+        <p>Bottom navbar Back button navigates history.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📌</div>
+        <h3>Sticky Mode</h3>
+        <p>Pins the phone on top for easy multi-tasking.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <h3>No CORS / CSP</h3>
+        <p>Smart proxy eliminates X-Frame-Options blocks.</p>
+      </div>
+    </div>
+
+    <div class="interactive-box">
+      <div class="section-title">
+        <span>Touch / Click Counter</span>
+      </div>
+      <div class="counter-display" id="counterNum">0</div>
+      <div class="btn-row">
+        <button onclick="changeCount(-1)">- Decrement</button>
+        <button onclick="changeCount(1)">+ Increment</button>
+      </div>
+    </div>
+
+    <div class="nav-test-box">
+      <h4>Test Navigation History</h4>
+      <p>Click below to push a new history entry, then test the phone's ◀ Back button at the bottom!</p>
+      <button class="page-link-btn" onclick="pushSubpage()">Go to Subpage #<span id="pageStep">1</span></button>
+      <div id="subpageStatus" style="margin-top:10px; font-size:0.8rem; color:#4ade80;"></div>
+    </div>
+  </div>
+
+  <script>
+    let count = 0;
+    function changeCount(delta) {
+      count += delta;
+      document.getElementById('counterNum').innerText = count;
+    }
+
+    let step = 1;
+    function pushSubpage() {
+      step++;
+      document.getElementById('pageStep').innerText = step;
+      history.pushState({ step: step }, 'Subpage ' + step, '?page=' + step);
+      document.getElementById('subpageStatus').innerText = 'Navigated to ?page=' + step + '. Now click the phone Back (◀) button!';
+    }
+
+    window.addEventListener('popstate', (e) => {
+      const currentStep = e.state ? e.state.step : 1;
+      document.getElementById('pageStep').innerText = currentStep;
+      document.getElementById('subpageStatus').innerText = '◀ Back button navigated to page #' + currentStep + '!';
+    });
+  </script>
+</body>
+</html>

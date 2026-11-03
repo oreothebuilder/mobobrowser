@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Device Browser</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Physical Phone Frame (Root of Native Window) -->
+  <div class="phone-frame" id="phoneFrame">
+    
+    <!-- Exterior Hardware Buttons -->
+    <div class="hw-button hw-volume-up"></div>
+    <div class="hw-button hw-volume-down"></div>
+    <div class="hw-button hw-power"></div>
+    
+    <!-- Phone Chassis (Physical Outer Body) -->
+    <div class="phone-chassis" id="phoneChassis">
+      
+      <!-- Top Speaker Grill Slit -->
+      <div class="speaker-grill"></div>
+
+      <!-- INNER SCREEN -->
+      <div class="device-screen" id="deviceScreen">
+        
+        <!-- 1. CLEAN STATUS BAR (Real Time on Left, Full Battery on Right, Centered Camera) -->
+        <header class="mobile-status-bar" id="statusBar">
+          <div class="status-left">
+            <span class="status-clock" id="statusClock">19:38</span>
+          </div>
+
+          <!-- Camera Cutout (Centered Symmetrically) -->
+          <div class="camera-center-wrapper" id="cameraWrapper">
+            <div class="camera-lens punch-hole" id="cameraLens"></div>
+          </div>
+
+          <div class="status-right">
+            <!-- WiFi Icon -->
+            <svg class="status-svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+              <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.51 0 6.72 1.34 9.14 3.53L12 19.34 2.86 11.03C5.28 8.84 8.49 7.5 12 7.5z"/>
+            </svg>
+            <!-- Cellular 5G -->
+            <span class="signal-tag">5G</span>
+            <!-- Full Battery Indicator (100%) -->
+            <div class="battery-capsule" title="Battery: 100% Full">
+              <span class="battery-percent">100%</span>
+              <div class="battery-shell">
+                <div class="battery-fill-bar"></div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- 2. BROWSER TOOLBAR (Matches Reference Screenshot) -->
+        <nav class="browser-toolbar" id="browserToolbar">
+          <!-- Home Button (Takes to Google.com) -->
+          <button class="tb-btn tb-home" id="btnHome" title="Home Screen (Google)">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5z"/>
+            </svg>
+          </button>
+
+          <!-- Search / URL Omnibox (Rounded Pill from Screenshot) -->
+          <div class="omnibox-wrapper" id="omniboxWrapper">
+            <input 
+              type="text" 
+              class="omnibox-input" 
+              id="omniboxInput" 
+              placeholder="Search Google or enter link..."
+              value="https://www.google.com"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button class="omnibox-clear-btn" id="btnClearSearch" title="Clear input" style="display:none;">✕</button>
+          </div>
+
+          <!-- Plus Button (Opens New Tab) -->
+          <button class="tb-btn tb-plus" id="btnNewTab" title="New Tab (+)">
+            <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </button>
+
+          <!-- Tab Counter Badge Button (Opens Tabs Overview) -->
+          <button class="tb-btn tb-tabs" id="btnTabsCounter" title="View Opened Tabs">
+            <div class="tab-badge-box">
+              <span class="tab-count-text" id="tabCountBadge">1</span>
+            </div>
+          </button>
+
+          <!-- 3-Dots Settings Button (Click opens, clicking again closes menu) -->
+          <button class="tb-btn tb-dots" id="btnThreeDots" title="Settings & Devices (Click to Toggle)">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <circle cx="12" cy="5" r="2"/>
+              <circle cx="12" cy="12" r="2"/>
+              <circle cx="12" cy="19" r="2"/>
+            </svg>
+          </button>
+        </nav>
+
+        <!-- 3. FLOATING SETTINGS MENU (Toggled by 3-dots) -->
+        <div class="floating-settings-menu" id="floatingSettingsMenu" style="display: none;">
+          <div class="fmenu-header">
+            <div class="fmenu-title">
+              <span class="fmenu-dot"></span>
+              <span class="fmenu-device-name" id="menuDeviceName">Pixel 8 / 9 Pro</span>
+              <span class="fmenu-res" id="menuDeviceRes">412 × 915</span>
+            </div>
+            <div class="fmenu-win-actions">
+              <button class="fwin-btn" id="btnMinWin" title="Minimize Window">─</button>
+              <button class="fwin-btn fwin-close" id="btnCloseWin" title="Close App">✕</button>
+            </div>
+          </div>
+
+          <!-- Quick Localhost Bar -->
+          <div class="fmenu-section">
+            <span class="fsection-label">Quick Localhost Ports:</span>
+            <div class="quick-port-grid">
+              <button class="qport-btn" data-url="http://localhost:3000">:3000</button>
+              <button class="qport-btn" data-url="http://localhost:5173">:5173 (Vite)</button>
+              <button class="qport-btn" data-url="http://localhost:8080">:8080</button>
+              <button class="qport-btn" data-url="http://localhost:4200">:4200</button>
+              <button class="qport-btn" data-url="http://localhost:8000">:8000</button>
+              <button class="qport-btn demo-btn" id="btnMenuDemo">Demo Page</button>
+            </div>
+          </div>
+
+          <!-- Settings Items -->
+          <div class="fmenu-settings-list">
+            
+            <!-- 1. TOGGLE NAVBAR ON / OFF -->
+            <div class="fsetting-row">
+              <div class="fsetting-info">
+                <span class="fsetting-name">Bottom Navbar</span>
+                <span class="fsetting-sub">◀ Back, ⚪ Home, ◽ Tabs</span>
+              </div>
+              <button class="fswitch active" id="btnToggleNavbar">
+                <span class="fswitch-text">ON</span>
+              </button>
+            </div>
+
+            <!-- 2. SWITCH DEVICE -->
+            <div class="fsetting-row">
+              <div class="fsetting-info">
+                <span class="fsetting-name">Switch Device</span>
+                <span class="fsetting-sub">Resolution & Aspect Ratio</span>
+              </div>
+              <div class="fdevice-controls">
+                <select id="deviceSelector" class="fdevice-select"></select>
+                <button class="ficon-btn" id="btnRotateDevice" title="Rotate (Portrait / Landscape)">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- 3. FIXED ON OR OFF (STICKY / ALWAYS ON TOP) -->
+            <div class="fsetting-row">
+              <div class="fsetting-info">
+                <span class="fsetting-name">Fixed (Sticky on Top)</span>
+                <span class="fsetting-sub">Pins window on top of all desktop apps</span>
+              </div>
+              <button class="fswitch" id="btnToggleFixed">
+                <span class="fswitch-text">OFF</span>
+              </button>
+            </div>
+
+            <!-- Reload Active Tab -->
+            <button class="freload-btn" id="btnReloadTab">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+              Reload Active Tab
+            </button>
+
+          </div>
+        </div>
+
+        <!-- 4. TAB OVERVIEW / SWITCHER SCREEN -->
+        <div class="tabs-overview-overlay" id="tabsOverviewOverlay" style="display: none;">
+          <div class="tabs-overview-header">
+            <div class="to-header-title">
+              <h3>Opened Tabs</h3>
+              <span class="to-count" id="toTabCount">1 Tab</span>
+            </div>
+            <div class="to-header-actions">
+              <button class="to-new-tab-btn" id="btnOverviewNewTab">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New Tab
+              </button>
+              <button class="to-close-btn" id="btnCloseTabsOverview">✕</button>
+            </div>
+          </div>
+          <!-- Grid of open tabs -->
+          <div class="tabs-grid" id="tabsGrid"></div>
+        </div>
+
+        <!-- 5. WEBVIEWS CONTAINER (Houses Active & Background Webviews) -->
+        <div class="webviews-container" id="webviewsContainer">
+          <!-- Webviews dynamically managed here -->
+        </div>
+
+        <!-- Top Progress / Loading Line -->
+        <div class="page-loader" id="pageLoader" style="display: none;">
+          <div class="page-spinner"></div>
+        </div>
+
+        <!-- 6. ANDROID 3-BUTTON NAVBAR -->
+        <!-- MIDDLE BUTTON: TAKE ME BACK TO HOME SCREEN (Google) -->
+        <!-- BACK BUTTON: BACK IN HISTORY -->
+        <!-- OTHER BUTTON: SEE CURRENTLY OPENED TABS -->
+        <nav class="android-navbar" id="androidNavbar">
+          <!-- 1. BACK BUTTON -->
+          <button class="nav-btn nav-back" id="btnNavBack" title="Back">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+
+          <!-- 2. MIDDLE BUTTON: HOME SCREEN (Google) -->
+          <button class="nav-btn nav-home" id="btnNavHome" title="Home Screen (Google)">
+            <div class="nav-circle-icon"></div>
+          </button>
+
+          <!-- 3. OTHER BUTTON: SEE CURRENTLY OPENED TABS -->
+          <button class="nav-btn nav-recents" id="btnNavRecents" title="View Opened Tabs">
+            <div class="nav-square-icon"></div>
+          </button>
+        </nav>
+
+        <!-- Gesture line bar (shown when navbar is toggled OFF) -->
+        <div class="gesture-bar" id="gestureBar" style="display: none;">
+          <div class="gesture-line"></div>
+        </div>
+
+      </div> <!-- /device-screen -->
+    </div> <!-- /phone-chassis -->
+  </div> <!-- /phone-frame -->
+
+  <!-- Tactile toast message -->
+  <div class="tactile-toast" id="tactileToast" style="display: none;"></div>
+
+  <script src="devices.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
